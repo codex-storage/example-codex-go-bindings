@@ -4,13 +4,15 @@ This repository demonstrates how to integrate the [Codex Go bindings](https://gi
 
 The project starts a Codex node, uploads and downloads some data, and can be stopped with `Ctrl+C`.
 
-## Get the Go dependency 
+## Usage
+
+### Get the Go dependency
 
 ```sh
 go get 
 ```
 
-## Fetch the artifacts
+### Fetch the artifacts
 
 ```sh
 # Adapt for your OS
@@ -22,13 +24,13 @@ make fetch
 By default, the last release will be downloaded and extracted to libs folder. You can change the `Makefile`
 to specify another folder or download a specific version.
 
-## Build
+### Build
 
 ```sh
 make build
 ```
 
-## Run 
+### Run
 
 ```sh
 ./example
