@@ -16,8 +16,8 @@ go get
 
 ```sh
 # Adapt for your OS
-OS := "linux"
-ARCH := "amd64"
+OS := "linux" # can be linux, macos or windows
+ARCH := "amd64" # can amd64 or arm64
 make fetch
 ```
 
