@@ -1,0 +1,8 @@
+# Ignore artifacts downloaded
+libs
+
+# Ignore file downloaded
+hello.txt
+
+# Ignore executable
+example
