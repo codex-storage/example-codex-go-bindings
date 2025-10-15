@@ -5,7 +5,7 @@ LIBS_DIR := $(abspath ./libs)
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
 	CGO_CFLAGS  := -I$(LIBS_DIR)
-	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl
+	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath
 else
 	CGO_CFLAGS  := -I$(LIBS_DIR)
 	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,$(LIBS_DIR)
