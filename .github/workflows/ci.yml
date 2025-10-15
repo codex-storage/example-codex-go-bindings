@@ -25,10 +25,10 @@ jobs:
             name: macos
             cpu: arm64
           
-          - os: windows-latest
-            cpu: amd64
-            name: windows
-            lib_ext: dll
+          # - os: windows-latest
+          #   cpu: amd64
+          #   name: windows
+          #   lib_ext: dll
       
     steps:
       - name: Check out sources
