@@ -41,8 +41,7 @@ build:
 
 run:
 ifeq ($(OS),Windows_NT)
-	pwsh -Command "Copy-Item libs\libcodex.dll ."
-	pwsh -Command ".\$(BIN_NAME)"
+	pwsh -File $(CURDIR)/.github/scripts/run-windows.ps1 -BinaryName $(BIN_NAME)
 else ifeq ($(UNAME_S),Darwin)
 # 	Instead of relying on install_name_tool, we can define DYLD_LIBRARY_PATH
 #   DYLD_LIBRARY_PATH=$(LIBS_DIR) ./$(BIN_NAME)
