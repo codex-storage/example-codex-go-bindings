@@ -39,8 +39,7 @@ build:
 run:
 ifeq ($(OS),Windows_NT)
 	dir libs
-	set PATH=libs;%PATH%
-	.\$(BIN_NAME)
+	PATH=libs:$(PATH) .\$(BIN_NAME)
 else
 	./$(BIN_NAME)
 endif
