@@ -20,7 +20,7 @@ all: run
 fetch: 
 	@echo "Fetching libcodex from GitHub Actions: ${LATEST_URL}"
 	@curl -fSL --create-dirs -o $(LIBS_DIR)/codex-${OS}-${ARCH}.zip ${LATEST_URL}
-	@unzip $(LIBS_DIR)/codex-linux-amd64.zip -d $(LIBS_DIR) 
+	@unzip $(LIBS_DIR)/codex-${OS}-${ARCH}.zip -d $(LIBS_DIR)
 	@rm -f $(LIBS_DIR)/*.zip
 
 build:
