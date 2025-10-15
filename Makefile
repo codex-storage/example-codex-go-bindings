@@ -4,13 +4,8 @@ LIBS_DIR := $(abspath ./libs)
 UNAME_S := $(shell uname -s)
 
 # Flags for CGO to find the headers and the shared library
-ifeq ($(UNAME_S),Darwin)
-	CGO_CFLAGS  := -I$(LIBS_DIR)
-	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,@executable_path/./libs
-else
-	CGO_CFLAGS  := -I$(LIBS_DIR)
-	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,$(LIBS_DIR)
-endif
+CGO_CFLAGS  := -I$(LIBS_DIR)
+CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,$(LIBS_DIR)
 
 ifeq ($(OS),Windows_NT)
   BIN_NAME := example.exe
