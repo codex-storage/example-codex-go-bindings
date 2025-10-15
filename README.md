@@ -15,14 +15,17 @@ go get
 ### Fetch the artifacts
 
 ```sh
-# Adapt for your OS
-OS := "linux" # can be linux, macos or windows
-ARCH := "amd64" # can amd64 or arm64
 make fetch
 ```
 
-By default, the last release will be downloaded and extracted to libs folder. You can change the `Makefile`
-to specify another folder or download a specific version.
+The default `OS` is `linux` and the default `ARCH` is `amd64`.
+You can update them like this:
+
+```sh
+OS="macos" ARCH="arm64" make fetch
+```
+
+By default, the last release will be downloaded and extracted to libs folder.
 
 ### Build
 
