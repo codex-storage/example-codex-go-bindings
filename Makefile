@@ -30,15 +30,16 @@ all: run
 fetch: 
 	@echo "Fetching libcodex from GitHub Actions: ${LATEST_URL}"
 	@curl -fSL --create-dirs -o $(LIBS_DIR)/codex-${OS}-${ARCH}.zip ${LATEST_URL}
-	@unzip -o -qq $(LIBS_DIR)/codex-${OS}-${ARCH}.zip -d $(LIBS_DIR)
-	@rm -f $(LIBS_DIR)/*.zip
+	unzip -o -qq $(LIBS_DIR)/codex-${OS}-${ARCH}.zip -d $(LIBS_DIR)
+	rm -f $(LIBS_DIR)/*.zip
 
 build:
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go
 
 run:
 ifeq ($(OS),Windows_NT)
-	copy libs\libcodex.dll .
+	dir /b libs
+	copy .\libs\libcodex.dll .
 	.\$(BIN_NAME)
 else
 	./$(BIN_NAME)
