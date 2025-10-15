@@ -38,7 +38,8 @@ build:
 
 run:
 ifeq ($(OS),Windows_NT)
-	pwsh -NoProfile -Command "$env:PATH = (Join-Path (Get-Location) 'libs') + ';' + $env:PATH; & .\\$(BIN_NAME); exit $LASTEXITCODE"
+	copy libs\libcodex.dll .
+	.\$(BIN_NAME)
 else
 	./$(BIN_NAME)
 endif
