@@ -4,8 +4,13 @@ LIBS_DIR := $(abspath ./libs)
 UNAME_S := $(shell uname -s)
 
 # Flags for CGO to find the headers and the shared library
-CGO_CFLAGS  := -I$(LIBS_DIR)
-CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,$(LIBS_DIR)
+ifeq ($(UNAME_S),Darwin)
+	CGO_CFLAGS  := -I$(LIBS_DIR)
+	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,@executable_path/./libs
+else
+	CGO_CFLAGS  := -I$(LIBS_DIR)
+	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,$(LIBS_DIR)
+endif
 
 ifeq ($(OS),Windows_NT)
   BIN_NAME := example.exe
@@ -29,6 +34,9 @@ fetch:
 	rm -f $(LIBS_DIR)/*.zip
 
 build:
+    @echo "CGO_CFLAGS=$(CGO_CFLAGS)"
+    @echo "CGO_LDFLAGS=$(CGO_LDFLAGS)"
+	ls -l $(LIBS_DIR)
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go
 
 run:
