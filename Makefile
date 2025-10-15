@@ -34,7 +34,7 @@ fetch:
 	@rm -f $(LIBS_DIR)/*.zip
 
 build:
-	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN) main.go
+	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go
 
 run:
 	./$(BIN_NAME)
