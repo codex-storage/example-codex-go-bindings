@@ -8,6 +8,8 @@ import (
 	"github.com/codex-storage/codex-go-bindings/codex"
 )
 
+// #cgo LDFLAGS: -L${SRCDIR}/libs -llibcodex
+
 func main() {
 	node, err := codex.New(codex.Config{
 		BlockRetries: 5,
