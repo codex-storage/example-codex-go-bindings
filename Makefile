@@ -32,7 +32,9 @@ fetch:
 	@curl -fSL --create-dirs -o $(LIBS_DIR)/codex-${OS}-${ARCH}.zip ${LATEST_URL}
 	unzip -o -qq $(LIBS_DIR)/codex-${OS}-${ARCH}.zip -d $(LIBS_DIR)
 	rm -f $(LIBS_DIR)/*.zip
-
+ifeq ($(UNAME_S),Darwin)
+	install_name_tool -id @rpath/libcodex.dylib libs/libcodex.dylib
+endif
 build:
 	@echo "CGO_CFLAGS=$(CGO_CFLAGS)"
 	@echo "CGO_LDFLAGS=$(CGO_LDFLAGS)"
@@ -44,8 +46,8 @@ ifeq ($(OS),Windows_NT)
 	pwsh -Command "Copy-Item libs\libcodex.dll ."
 	pwsh -Command ".\$(BIN_NAME)"
 else ifeq ($(UNAME_S),Darwin)
-	otool -L libs/libcodex.dylib
-    DYLD_LIBRARY_PATH=$(LIBS_DIR) ./$(BIN_NAME)
+#     DYLD_LIBRARY_PATH=$(LIBS_DIR) ./$(BIN_NAME)
+	./$(BIN_NAME)
 else
 	./$(BIN_NAME)
 endif
