@@ -39,9 +39,12 @@ endif
 build:
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go
 
-run:
 ifeq ($(OS),Windows_NT)
 PS_CMD := $$env:PATH += ';./libs'; .\$(BIN_NAME)
+endif
+
+run:
+ifeq ($(OS),Windows_NT)
 	pwsh -Command "$(PS_CMD)"
 else ifeq ($(UNAME_S),Darwin)
 # 	Instead of relying on install_name_tool, we can define DYLD_LIBRARY_PATH
