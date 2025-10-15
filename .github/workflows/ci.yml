@@ -42,8 +42,10 @@ jobs:
           go-version-file: go.mod
 
       - name: Fetch artifacts
-        run: |
-          OS="${{ matrix.target.name }}" ARCH="${{ matrix.target.cpu }}" make fetch 
+        env:
+            OS: ${{ matrix.target.name }}
+            ARCH: ${{ matrix.target.cpu }}
+        run: make fetch 
       
       - name: Build
         run: make build
