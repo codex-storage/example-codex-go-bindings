@@ -39,11 +39,13 @@ build:
 	ls -l $(LIBS_DIR)
 	go env CGO_LDFLAGS
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go
-
 run:
 ifeq ($(OS),Windows_NT)
 	pwsh -Command "Copy-Item libs\libcodex.dll ."
 	pwsh -Command ".\$(BIN_NAME)"
+else ifeq ($(UNAME_S),Darwin)
+	otool -L libs/libcodex.dylib
+    DYLD_LIBRARY_PATH=$(LIBS_DIR) ./$(BIN_NAME)
 else
 	./$(BIN_NAME)
 endif
