@@ -38,7 +38,8 @@ build:
 
 run:
 ifeq ($(OS),Windows_NT)
-	@cmd /C "set PATH=%CD%\\libs;%PATH% && .\\$(BIN_NAME)"
+	@cmd /C "set PATH=%CD%\\libs;%PATH%"
+	.\\$(BIN_NAME)
 else
 	./$(BIN_NAME)
 endif
