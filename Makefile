@@ -35,9 +35,9 @@ fetch:
 	unzip -o -qq $(LIBS_DIR)/codex-${OS}-${ARCH}.zip -d $(LIBS_DIR)
 	rm -f $(LIBS_DIR)/*.zip
 # Update the path to the shared library on macOS
-ifeq ($(UNAME_S),Darwin)
-	install_name_tool -id @rpath/libcodex.dylib $(LIBS_DIR)/libcodex.dylib
-endif
+# ifeq ($(UNAME_S),Darwin)
+# 	install_name_tool -id @rpath/libcodex.dylib $(LIBS_DIR)/libcodex.dylib
+# endif
 
 build:
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go
