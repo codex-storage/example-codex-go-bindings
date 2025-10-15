@@ -12,15 +12,18 @@ else
 	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,$(LIBS_DIR)
 endif
 
+ifeq ($(OS),windows)
+  BIN_NAME := example.exe
+else
+  BIN_NAME := example
+endif
+
 # Configuration for fetching the right binary
 OS ?= "linux"
 ARCH ?= "amd64"
 VERSION ?= "v0.0.16"
 LATEST_URL := "https://github.com/codex-storage/codex-go-bindings/releases/latest/download/codex-${OS}-${ARCH}.zip"
 VERSIONED_URL := "https://github.com/codex-storage/codex-go-bindings/releases/download/$(VERSION)/codex-${OS}-${ARCH}.zip"
-
-# Just for the example
-BIN=example
 
 all: run
 
@@ -34,8 +37,8 @@ build:
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN) main.go
 
 run:
-	./example
+	./$(BIN_NAME)
 
 clean:
-	rm -f $(BIN)
+	rm -f $(BIN_NAME)
 	rm -Rf $(LIBS_DIR)/*
