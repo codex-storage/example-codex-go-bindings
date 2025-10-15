@@ -1,3 +1,4 @@
+// #cgo LDFLAGS: -L${SRCDIR}/libs -llibcodex
 package main
 
 import (
