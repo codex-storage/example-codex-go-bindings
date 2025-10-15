@@ -15,7 +15,7 @@ endif
 # Configuration for fetching the right binary
 OS ?= "linux"
 ARCH ?= "amd64"
-VERSION ?= "v0.0.15"
+VERSION ?= "v0.0.16"
 LATEST_URL := "https://github.com/codex-storage/codex-go-bindings/releases/latest/download/codex-${OS}-${ARCH}.zip"
 VERSIONED_URL := "https://github.com/codex-storage/codex-go-bindings/releases/download/$(VERSION)/codex-${OS}-${ARCH}.zip"
 
