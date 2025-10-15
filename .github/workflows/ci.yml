@@ -20,10 +20,10 @@ jobs:
             name: linux
             lib_ext: so
           
-          # - os: macos-latest
-          #   lib_ext: so
-          #   name: macos
-          #   cpu: arm64
+          - os: macos-latest
+            lib_ext: so
+            name: macos
+            cpu: arm64
           
           - os: windows-latest
             cpu: amd64
@@ -46,7 +46,7 @@ jobs:
             OS: ${{ matrix.target.name }}
             ARCH: ${{ matrix.target.cpu }}
         run: make fetch 
-      
+
       - name: Build
         run: make build
 
