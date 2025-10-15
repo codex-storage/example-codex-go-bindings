@@ -37,7 +37,11 @@ build:
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go
 
 run:
+ifeq ($(OS),Windows_NT)
+	@cmd /C "set PATH=%CD%\\libs;%PATH% && .\\$(BIN_NAME)"
+else
 	./$(BIN_NAME)
+endif
 
 clean:
 	rm -f $(BIN_NAME)
