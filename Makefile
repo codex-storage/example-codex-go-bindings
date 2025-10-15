@@ -38,8 +38,7 @@ build:
 
 run:
 ifeq ($(OS),Windows_NT)
-	@cmd /C "set PATH=%CD%\\libs;%PATH%"
-	.\\$(BIN_NAME)
+	pwsh -NoProfile -Command "$env:PATH = (Join-Path (Get-Location) 'libs') + ';' + $env:PATH; & .\\$(BIN_NAME); exit $LASTEXITCODE"
 else
 	./$(BIN_NAME)
 endif
