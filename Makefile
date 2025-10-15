@@ -2,11 +2,10 @@
 LIBS_DIR := $(abspath ./libs)
 
 UNAME_S := $(shell uname -s)
-
 # Flags for CGO to find the headers and the shared library
 ifeq ($(UNAME_S),Darwin)
 	CGO_CFLAGS  := -I$(LIBS_DIR)
-	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,@executable_path/./libs
+	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,@executable_path/libs
 else
 	CGO_CFLAGS  := -I$(LIBS_DIR)
 	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,$(LIBS_DIR)
@@ -29,9 +28,13 @@ all: run
 
 fetch: 
 	@echo "Fetching libcodex from GitHub Actions: ${LATEST_URL}"
-	@curl -fSL --create-dirs -o $(LIBS_DIR)/codex-${OS}-${ARCH}.zip ${LATEST_URL}
+	curl -fSL --create-dirs -o $(LIBS_DIR)/codex-${OS}-${ARCH}.zip ${LATEST_URL}
 	unzip -o -qq $(LIBS_DIR)/codex-${OS}-${ARCH}.zip -d $(LIBS_DIR)
 	rm -f $(LIBS_DIR)/*.zip
+# Update the path to the shared library on macOS
+ifeq ($(UNAME_S),Darwin)
+	install_name_tool -id @rpath/libcodex.dylib $(LIBS_DIR)/libcodex.dylib
+endif
 
 build:
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go
@@ -40,6 +43,10 @@ run:
 ifeq ($(OS),Windows_NT)
 	pwsh -Command "Copy-Item libs\libcodex.dll ."
 	pwsh -Command ".\$(BIN_NAME)"
+else ifeq ($(UNAME_S),Darwin)
+# 	Instead of relying on install_name_tool, we can define DYLD_LIBRARY_PATH
+#   DYLD_LIBRARY_PATH=$(LIBS_DIR) ./$(BIN_NAME)
+	./$(BIN_NAME)
 else
 	./$(BIN_NAME)
 endif
