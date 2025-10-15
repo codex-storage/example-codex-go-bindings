@@ -13,7 +13,7 @@ else
 endif
 
 ifeq ($(OS),Windows_NT)
-  BIN_NAME := example.exe
+  BIN_NAME := example
 else
   BIN_NAME := example
 endif
