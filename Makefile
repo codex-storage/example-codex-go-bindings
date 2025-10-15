@@ -38,7 +38,7 @@ build:
 
 run:
 ifeq ($(OS),Windows_NT)
-	dir /b libs
+	dir libs
 	copy .\libs\libcodex.dll .
 	.\$(BIN_NAME)
 else
