@@ -37,6 +37,7 @@ build:
 	@echo "CGO_CFLAGS=$(CGO_CFLAGS)"
 	@echo "CGO_LDFLAGS=$(CGO_LDFLAGS)"
 	ls -l $(LIBS_DIR)
+	go env CGO_LDFLAGS
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go
 
 run:
