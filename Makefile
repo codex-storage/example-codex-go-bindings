@@ -41,7 +41,8 @@ build:
 
 run:
 ifeq ($(OS),Windows_NT)
-	pwsh -Command "$$env:PATH += ';./libs'; .\$(BIN_NAME)"
+	PS_CMD = $$env:PATH += ';./libs'; .\$(BIN_NAME)
+	pwsh -Command "$(PS_CMD)"
 else ifeq ($(UNAME_S),Darwin)
 # 	Instead of relying on install_name_tool, we can define DYLD_LIBRARY_PATH
 #   DYLD_LIBRARY_PATH=$(LIBS_DIR) ./$(BIN_NAME)
