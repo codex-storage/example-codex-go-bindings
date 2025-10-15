@@ -38,8 +38,8 @@ build:
 
 run:
 ifeq ($(OS),Windows_NT)
-	Copy-Item libs\libcodex.dll .
-	.\$(BIN_NAME)
+	pwsh -Command "Copy-Item libs\libcodex.dll ."
+	pwsh -Command ".\$(BIN_NAME)"
 else
 	./$(BIN_NAME)
 endif
