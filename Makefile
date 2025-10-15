@@ -39,7 +39,7 @@ build:
 run:
 ifeq ($(OS),Windows_NT)
 	dir libs
-	PATH=libs:$(PATH) .\$(BIN_NAME)
+	cmd /C "set PATH=%CD%\\libs;%PATH% && .\$(BIN_NAME)" > CON && type CON
 else
 	./$(BIN_NAME)
 endif
