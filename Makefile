@@ -3,7 +3,7 @@ LIBS_DIR := $(abspath ./libs)
 
 # Flags for CGO to find the headers and the shared library
 CGO_CFLAGS  := -I$(LIBS_DIR)
-CGO_LDFLAGS := -L$(LIBS_DIR) -Wl,-rpath,$(LIBS_DIR)
+CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,$(LIBS_DIR)
 
 # Configuration for fetching the right binary
 OS ?= "linux"
@@ -24,7 +24,7 @@ fetch:
 	@rm -f $(LIBS_DIR)/*.zip
 
 build:
-	CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN) main.go
+	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN) main.go
 
 run:
 	./example

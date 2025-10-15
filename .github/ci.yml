@@ -1,0 +1,52 @@
+name: Artifacts
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.target.os }}
+    strategy:
+      matrix:
+        target:
+          - os: ubuntu-latest
+            name: linux
+            cpu: amd64
+            lib_ext: so
+          
+          - os: ubuntu-24.04-arm
+            cpu: arm64
+            name: linux
+            lib_ext: so
+          
+          - os: macos-latest
+            lib_ext: so
+            name: macos
+            cpu: arm64
+          
+          - os: windows-latest
+            cpu: amd64
+            name: windows
+            lib_ext: dll
+      
+    steps:
+      - name: Check out sources
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Fetch artifacts
+        run: |
+          OS="${{ matrix.target.name }}" ARCH="${{ matrix.target.cpu }}" make fetch 
+      
+      - name: Build
+        run: make build
+
+      - name: Run 
+        run: make run

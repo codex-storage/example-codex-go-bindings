@@ -4,8 +4,6 @@ import (
 	"bytes"
 	"log"
 	"os"
-	"os/signal"
-	"syscall"
 
 	"github.com/codex-storage/codex-go-bindings/codex"
 )
@@ -54,9 +52,9 @@ func main() {
 	log.Println("Downloaded data to hello.txt")
 
 	// Wait for a SIGINT or SIGTERM signal
-	ch := make(chan os.Signal, 1)
-	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
-	<-ch
+	// ch := make(chan os.Signal, 1)
+	// signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
+	// <-ch
 
 	if err := node.Stop(); err != nil {
 		log.Fatalf("Failed to stop Codex node: %v", err)
