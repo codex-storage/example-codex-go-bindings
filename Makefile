@@ -15,7 +15,7 @@ endif
 # Configuration for fetching the right binary
 OS ?= "linux"
 ARCH ?= "amd64"
-VERSION ?= "v0.0.20"
+VERSION ?= "v0.0.21"
 DOWNLOAD_URL := "https://github.com/codex-storage/codex-go-bindings/releases/download/$(VERSION)/codex-${OS}-${ARCH}.zip"		
 
 all: run
@@ -32,10 +32,6 @@ build:
 run:
 ifeq ($(OS),Windows_NT)
 	pwsh -File $(CURDIR)/.github/scripts/run-windows.ps1 -BinaryName $(BIN_NAME)
-else ifeq ($(UNAME_S),Darwin)
-# 	Instead of relying on install_name_tool, we can define DYLD_LIBRARY_PATH
-#   DYLD_LIBRARY_PATH=$(LIBS_DIR) ./$(BIN_NAME)
-	./$(BIN_NAME)
 else
 	./$(BIN_NAME)
 endif
