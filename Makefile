@@ -38,7 +38,7 @@ endif
 
 build:
 ifeq ($(UNAME_S),Darwin)
-	install_name_tool -id @rpath/libcodex.dylib $(LIBS_DIR)/libcodex.dylib
+# 	install_name_tool -id @rpath/libcodex.dylib $(LIBS_DIR)/libcodex.dylib
 endif
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go
 
@@ -47,7 +47,7 @@ ifeq ($(OS),Windows_NT)
 	pwsh -File $(CURDIR)/.github/scripts/run-windows.ps1 -BinaryName $(BIN_NAME)
 else ifeq ($(UNAME_S),Darwin)
 # 	Instead of relying on install_name_tool, we can define DYLD_LIBRARY_PATH
-#   DYLD_LIBRARY_PATH=$(LIBS_DIR) ./$(BIN_NAME)
+	DYLD_LIBRARY_PATH=$(LIBS_DIR) ./$(BIN_NAME)
 	./$(BIN_NAME)
 else
 	./$(BIN_NAME)
