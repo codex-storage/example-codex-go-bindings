@@ -3,13 +3,8 @@ LIBS_DIR := $(abspath ./libs)
 
 # Flags for CGO to find the headers and the shared library
 UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Darwin)
-	CGO_CFLAGS  := -I$(LIBS_DIR)
-	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,@executable_path
-else
-	CGO_CFLAGS  := -I$(LIBS_DIR)
-	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,$(LIBS_DIR)
-endif
+CGO_CFLAGS  := -I$(LIBS_DIR)
+CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,$(LIBS_DIR)
 
 ifeq ($(OS),Windows_NT)
   BIN_NAME := example.exe
@@ -30,10 +25,6 @@ fetch:
 	curl -fSL --create-dirs -o $(LIBS_DIR)/codex-${OS}-${ARCH}.zip ${DOWNLOAD_URL}
 	unzip -o -qq $(LIBS_DIR)/codex-${OS}-${ARCH}.zip -d $(LIBS_DIR)
 	rm -f $(LIBS_DIR)/*.zip
-# Update the path to the shared library on macOS
-# ifeq ($(UNAME_S),Darwin)
-# 	install_name_tool -id @rpath/libcodex.dylib $(LIBS_DIR)/libcodex.dylib
-# endif
 
 build:
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go
