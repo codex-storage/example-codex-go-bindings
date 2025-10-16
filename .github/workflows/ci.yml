@@ -41,11 +41,11 @@ jobs:
         with:
           go-version-file: go.mod
 
-      # - name: Fetch artifacts
-      #   env:
-      #       OS: ${{ matrix.target.name }}
-      #       ARCH: ${{ matrix.target.cpu }}
-      #   run: make fetch 
+      - name: Fetch artifacts
+        env:
+            OS: ${{ matrix.target.name }}
+            ARCH: ${{ matrix.target.cpu }}
+        run: make fetch 
 
       - name: Build
         run: make build
