@@ -1,5 +1,5 @@
 # Destination folder for the downloaded libraries
-LIBS_DIR := $(abspath ./libs2)
+LIBS_DIR := $(abspath ./libs)
 
 # Flags for CGO to find the headers and the shared library
 UNAME_S := $(shell uname -s)
