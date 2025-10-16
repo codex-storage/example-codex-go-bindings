@@ -1,11 +1,12 @@
 # Destination folder for the downloaded libraries
-LIBS_DIR := $(abspath ./libs)
+# LIBS_DIR := $(abspath ./libs)
+LIBS_DIR := $(abspath ./libs2)
 
 # Flags for CGO to find the headers and the shared library
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
 	CGO_CFLAGS  := -I$(LIBS_DIR)
-	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,@executable_path
+	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,$(LIBS_DIR)
 else
 	CGO_CFLAGS  := -I$(LIBS_DIR)
 	CGO_LDFLAGS := -L$(LIBS_DIR) -lcodex -Wl,-rpath,$(LIBS_DIR)
