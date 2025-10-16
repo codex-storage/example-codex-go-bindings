@@ -20,12 +20,7 @@ endif
 # Configuration for fetching the right binary
 OS ?= "linux"
 ARCH ?= "amd64"
-VERSION ?= "v0.0.17"
-DOWNLOAD_URL ?= "https://github.com/codex-storage/codex-go-bindings/releases/latest/download/codex-${OS}-${ARCH}.zip"
-
-ifneq ($(VERSION),)
-	DOWNLOAD_URL := "https://github.com/codex-storage/codex-go-bindings/releases/download/$(VERSION)/codex-${OS}-${ARCH}.zip"		
-endif
+VERSION ?= "v0.0.20"
 
 all: run
 
@@ -35,9 +30,9 @@ fetch:
 	unzip -o -qq $(LIBS_DIR)/codex-${OS}-${ARCH}.zip -d $(LIBS_DIR)
 	rm -f $(LIBS_DIR)/*.zip
 # Update the path to the shared library on macOS
-ifeq ($(UNAME_S),Darwin)
-	install_name_tool -id @rpath/libcodex.dylib $(LIBS_DIR)/libcodex.dylib
-endif
+# ifeq ($(UNAME_S),Darwin)
+# 	install_name_tool -id @rpath/libcodex.dylib $(LIBS_DIR)/libcodex.dylib
+# endif
 
 build:
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go

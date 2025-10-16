@@ -18,3 +18,5 @@ github.com/codex-storage/codex-go-bindings v0.0.18 h1:0l9XEoH9O5Akg7KCJreZq5jQxd
 github.com/codex-storage/codex-go-bindings v0.0.18/go.mod h1:8yC11Vr1Mu5sqZyQ33GaSCr0uUIbQnGkm0aWqZj62Kg=
 github.com/codex-storage/codex-go-bindings v0.0.19 h1:zhEhwzcavvYdfkHpB5BH+PaqYvQ4VonIKhebS1vbKh0=
 github.com/codex-storage/codex-go-bindings v0.0.19/go.mod h1:8yC11Vr1Mu5sqZyQ33GaSCr0uUIbQnGkm0aWqZj62Kg=
+github.com/codex-storage/codex-go-bindings v0.0.20 h1:vK9jU8vafSJkMpOEHdPiQ9S8owSGUaPGVUxb7hKaIck=
+github.com/codex-storage/codex-go-bindings v0.0.20/go.mod h1:8yC11Vr1Mu5sqZyQ33GaSCr0uUIbQnGkm0aWqZj62Kg=
