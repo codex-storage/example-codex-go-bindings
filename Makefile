@@ -38,7 +38,7 @@ endif
 
 build:
 ifeq ($(UNAME_S),Darwin)
-# 	install_name_tool -id @rpath/libcodex.dylib $(LIBS_DIR)/libcodex.dylib
+	install_name_tool -id @rpath/libcodex.dylib $(LIBS_DIR)/libcodex.dylib
 endif
 	CGO_ENABLED=1 CGO_CFLAGS="$(CGO_CFLAGS)" CGO_LDFLAGS="$(CGO_LDFLAGS)" go build -o $(BIN_NAME) main.go
 
