@@ -21,6 +21,7 @@ endif
 OS ?= "linux"
 ARCH ?= "amd64"
 VERSION ?= "v0.0.20"
+DOWNLOAD_URL := "https://github.com/codex-storage/codex-go-bindings/releases/download/$(VERSION)/codex-${OS}-${ARCH}.zip"		
 
 all: run
 
