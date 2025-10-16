@@ -13,15 +13,12 @@ jobs:
           - os: ubuntu-latest
             name: linux
             cpu: amd64
-            lib_ext: so
           
           - os: ubuntu-24.04-arm
             cpu: arm64
             name: linux
-            lib_ext: so
           
           - os: macos-latest
-            lib_ext: so
             name: macos
             cpu: arm64
           
